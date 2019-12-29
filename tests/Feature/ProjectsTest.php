@@ -37,15 +37,15 @@ class ProjectsTest extends TestCase
         $this->get('/projects')->assertSee($attributes['title']);
     }
 
-    public function test_user_can_view_project() {
+    public function test_guests_cannot_manage_project() {
 
-        
         $project = factory('App\Project')->create();
 
-        $this->get($project->path())
-            ->assertSee($project->title)
-            ->assertSee($project->description);
+        $this->get('/projects')->assertRedirect('login');
+        $this->get($project->path())->assertRedirect('login');
+        $this->post('projects', $project->toArray())->assertRedirect('login');
     }
+
 
     public function test_auth_users_cannot_view_projects_of_others() {
         $this->be(factory('App\User')->create());
