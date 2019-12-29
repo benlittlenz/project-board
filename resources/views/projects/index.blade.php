@@ -1,7 +1,11 @@
 @extends ('layouts.app')
 
 @section ('content')
-    <h1>birdboard</h1>
+    <div class="flex items-center mb-3">
+        <h1 class="mr-auto">birdboard</h1>
+        <a href="/projects/create">Create project</a>
+    </div>
+    
 
     <ul>
         @forelse ($projects as $project)
