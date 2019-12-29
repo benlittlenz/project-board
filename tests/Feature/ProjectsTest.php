@@ -10,12 +10,17 @@ class ProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    public function only_auth_users_can_create_projects() {
+    public function test_only_auth_users_can_create_projects() {
 
         //$this->withoutExceptionHandling();
 
         $attributes = factory('App\Project')->raw();
         $this->post('/projects', $attributes)->assertRedirect('login');
+    }
+
+    public function test_only_auth_users_can_view_projects() {
+
+        $this->get('/projects')->assertRedirect('login');
     }
 
     public function test_user_can_create_a_project()

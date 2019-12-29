@@ -8,7 +8,7 @@ use App\Project;
 class ProjectsController extends Controller
 {
     public function index() {
-        $projects = Project::all();
+        $projects = auth()->user()->projects;
 
         return view('projects.index', compact('projects'));
     }
