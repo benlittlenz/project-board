@@ -27,6 +27,8 @@ class ProjectsTest extends TestCase
     {
         $this->actingAs(factory('App\User')->create());
 
+        $this->get('/projects/create')->assertStatus(200);
+
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
@@ -42,6 +44,7 @@ class ProjectsTest extends TestCase
         $project = factory('App\Project')->create();
 
         $this->get('/projects')->assertRedirect('login');
+        $this->get('/projects/create')->assertRedirect('login');
         $this->get($project->path())->assertRedirect('login');
         $this->post('projects', $project->toArray())->assertRedirect('login');
     }
@@ -56,6 +59,7 @@ class ProjectsTest extends TestCase
         //if user tries to view project which is not theirs, it shouldnt work
         $this->get($project->path())->assertStatus(403);
     }
+
 
     public function test_project_belongs_to_owner() {
         $project = factory('App\Project')->create();
