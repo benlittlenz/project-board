@@ -6,15 +6,17 @@
         <a href="/projects/create">Create project</a>
     </div>
     
-
-    <ul>
+    <div class="flex">
         @forelse ($projects as $project)
-            <li>
-                <a href="{{$project->path()}}">{{$project->title}}</a>
-            </li>
-            @empty
-            <li>No projects yet.</li>
+        <div class="bg-white mr-4 p-5 rounded shadow w-1/3">
+            <h3 class="font-normal text-xl py-4">{{$project->title}}</h3>
+            <div class="text-grey">
+                {{Str::limit($project->description, 300)}}
+            </div>
+        </div>
+        @empty
+            <div>No projects yet.</div>
         @endforelse
-    </ul>
+    </div>
 
 @endsection
