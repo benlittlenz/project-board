@@ -23,9 +23,9 @@
     <div id="app">
         <nav class="bg-white">
             <div class="container mx-auto">
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center py-2">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="/images/download.svg" alt="">
                     </a>
 
                     <div class="">
@@ -68,7 +68,7 @@
             </div>
         </nav>
 
-        <main class="py-4 mx-auto">
+        <main class="container mx-auto py-4">
             @yield('content')
         </main>
     </div>
