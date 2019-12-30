@@ -13,12 +13,27 @@ class ProjectTasksTest extends TestCase
 
     public function test_project_has_tasks()
     {
+        $this->withoutExceptionHandling();
         $this->signIn();
 
-        $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
+        $project = auth()->user()->projects()->create(
+            factory(\App\Project::class)->raw()
+        );
 
         $this->post($project->path() . '/tasks', ['body' => 'Test task']);
 
-        $this->get($project->path())-assertSee('Test task');
+        $this->get($project->path())->assertSee('Test task');
+    }
+
+    public function test_task_requires_a_body() {
+        $this->signIn();
+
+        $project = auth()->user()->projects()->create(
+            factory(\App\Project::class)->raw()
+        );
+
+        $attributes = factory(\App\Task::class)->raw(['body' => '']);
+
+        $this->post($project->path() . '/tasks/', $attributes)->assertSessionHasErrors('body');
     }
 }
