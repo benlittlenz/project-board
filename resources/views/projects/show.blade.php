@@ -16,9 +16,11 @@
             <div class="w-3/4 px-3 mb-8">
                 <div class="mb-6">
                     <h2 class="text-lg text-gray-500 font-normal mb-3">Tasks</h2>
-                    @foreach ($project->tasks as $task)
+                    @forelse ($project->tasks as $task)
                         <div class="card mb-3">{{$task->body}}</div>
-                    @endforeach
+                        @empty
+                        <div class="card mb-3">Begin adding tasks</div>
+                    @endforelse
                 </div>
  
                 
