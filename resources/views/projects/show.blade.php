@@ -18,7 +18,7 @@
                     <h2 class="text-lg text-gray-500 font-normal mb-3">Tasks</h2>
                     @foreach ($project->tasks as $task)
                         <div class="card mb-3">
-                            <form method="POST" action="{{$project->path() . "/tasks/" . $task->id}}">
+                            <form method="POST" action="{{$task->path()}}">
                                 @method('PATCH')
                                 @csrf
                                 <div class="flex">
