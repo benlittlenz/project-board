@@ -7,7 +7,7 @@
                <a href="/projects" class="text-gray-500 text-sm font-normal no-underline">My Projects / {{$project->title}}</a> 
             </p>
 
-            <a href="/projects/create" class="button">New Project</a>
+            <a href="{{$project->path()."/edit"}}" class="button">Edit Project</a>
         </div>
     </header>
 
