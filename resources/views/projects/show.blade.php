@@ -70,9 +70,19 @@
                 @include('projects.card')
                 
                 <div class="card mt-3">
-                    <ul>
+                    <ul class="text-xs list-reset">
                         @foreach ($project->activity as $activity)
-                            <li>{{$activity->description}}</li>
+                            <li class="{{$loop->last ? '' : 'mb-1'}}">
+                                @if ($activity->description === 'created')
+                                    You created the project. <span class="text-gray-400">{{$activity->created_at->diffForHumans(null, true)}}</span>
+                                @elseif ($activity->description === 'created_task')
+                                    You created a task. <span class="text-gray-400">{{$activity->created_at->diffForHumans(null, true)}}</span>
+                                @elseif ($activity->description === 'completed_task')
+                                    You completed a task. <span class="text-gray-400">{{$activity->created_at->diffForHumans()}}</span>
+                                @else
+                                    {{$activity->description}}
+                                @endif
+                            </li>
                         @endforeach 
                     </ul>
          
