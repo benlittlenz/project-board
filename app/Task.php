@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Activity;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -67,6 +68,24 @@ class Task extends Model
     public function path()
     {
         return "/projects/{$this->project->id}/tasks/{$this->id}";
+    }
+
+    public function recordActivity($type)
+    {
+        $this->activity()->create([
+            'project_id' => $this.project_id, 
+            'description' => $type
+        ]);
+ 
+    }
+    /**
+     * The activity feed for the project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activity()
+    {
+        return $this->morphMany(Activity::class, 'subject')->latest();
     }
 
 }

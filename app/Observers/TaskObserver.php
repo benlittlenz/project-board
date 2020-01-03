@@ -15,10 +15,11 @@ class TaskObserver
      */
     public function created(Task $task)
     {
-        Activity::create([
-            'project_id' => $task->project->id,
-            'description' => 'created_task'
-        ]);
+        $task->recordActivity('created');
+        // Activity::create([
+        //     'project_id' => $task->project->id,
+        //     'description' => 'created_task'
+        // ]);
     }
 
     /**
